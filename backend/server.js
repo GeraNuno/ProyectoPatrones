@@ -5,8 +5,11 @@ const http = require('http');
 const cors = require('cors');
 const socketIO = require('socket.io');
 
+//Rutas
+const authRoutes = require('./rutas/auth');
 
 dotenv.config();
+
 const app = express();
 const server = http.createServer(app);
 const io = socketIO(server, {
@@ -17,8 +20,13 @@ const io = socketIO(server, {
 
 require('./socket')(io);
 
-app.use(cors());
+app.use(cors({
+  origin: '*'
+}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.use('/auth', authRoutes);
 
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => {

@@ -10,3 +10,34 @@ body {
     background-color: #f9f9f9;
     color: #333;
 }
+
+/*Animaciones*/
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out forwards;
+  }
+  .fade-out {
+    animation: fadeOut 0.5s ease-in-out forwards;
+  }
+
+@keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+  }

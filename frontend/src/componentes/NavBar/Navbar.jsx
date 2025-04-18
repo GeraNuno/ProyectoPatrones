@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import './navbar.css';
 
+import { useNavigate } from 'react-router-dom';
+
 import ReorderIcon from '@mui/icons-material/Reorder';
 import PersonIcon from '@mui/icons-material/Person';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -10,6 +12,7 @@ import Sidebar from '../SideBar/Sidebar';
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(false); // Para controlar la visibilidad real
+  const navigate = useNavigate();
 
   const handleToggle = () => {
     if (!isOpen) {
@@ -21,6 +24,14 @@ export default function Navbar() {
     }
   };
 
+  const handleHome = () => {
+    navigate('/');
+  };
+
+  const handleLogin = () => {
+    navigate('/login');
+  }
+
   return (
     <>
       <div className="nav-container">
@@ -28,9 +39,9 @@ export default function Navbar() {
           <div className="nav-left">
             <ReorderIcon className="nav-icons" onClick={handleToggle} />
           </div>
-          <div className="nav-center">VYNCE</div>
+          <div className="nav-center" onClick={handleHome}>VYNCE</div>
           <div className="nav-right">
-            <PersonIcon className="nav-icons" />
+            <PersonIcon className="nav-icons" onClick={handleLogin}/>
             <ShoppingCartIcon className="nav-icons" />
           </div>
         </nav>

@@ -1,0 +1,114 @@
+.login-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+.login-form {
+    width: 50%;
+    max-width: 400px;
+    height: auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+.form-top{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.form-center{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.form-center label{
+    text-decoration: none;
+    transition: color 0.3s;
+    width: 100%;
+}
+
+.form-center input{
+    width: 100%;
+    padding: 10px 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 10px;
+    background-color: #222222;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.btn-submit:hover {
+    background-color: #363f1f;
+}
+
+.form-registro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .form-options label, .form-registro a {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+  
+  .form-registro a:hover {
+    color: #666;
+  }
+
+  .mensaje {
+    position: fixed;
+    top: 20px;
+
+    justify-content: right;
+    align-items: right;
+    z-index: 999;
+
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    color: #fff;
+    font-size: 16px;
+
+    opacity: 0;
+    animation: fadeIn 0.5s ease-in-out forwards, fadeOut 0.5s ease-in-out 2.5s forwards;
+}
+  
+  .exito {
+    background-color: #4caf50;
+  }
+  .error {
+    background-color: #f44336;
+  }

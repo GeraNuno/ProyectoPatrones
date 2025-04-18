@@ -1,16 +1,17 @@
-.nav-container{
-    background-color: #ffffff38;
-    width: 95%;
-    position: sticky;
+.nav-container {
+    width: 100%;
+    position: absolute; /* o usa fixed si quieres que esté siempre visible al hacer scroll */
     top: 0;
-    border-radius: 15px;
-    margin: 0 auto;
-    transition:all 0.5s ease-in-out;
+    left: 0;
+    padding: 10px 40px;
+    background-color: transparent;
+    transition: all 0.5s ease-in-out;
 }
 
-.nav-container:hover{
-    background-color: #fff;
-    transition: background-color 0.5s ease-in-out;
+.nav-container:hover {
+    background-color: rgba(255, 255, 255, 1); /* fondo transparente elegante */
+    backdrop-filter: blur(4px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .navbar{
@@ -33,6 +34,7 @@
     justify-content: center;
     flex: 0.7;
     font-size: x-large;
+    cursor: pointer;
 }
 
 .nav-right{
