@@ -1,0 +1,14 @@
+.fragances-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+}
+
+.fragances-title{
+    font-size: 3rem;
+    color: #000;
+    margin-top: 2rem;
+    text-transform: uppercase;
+}

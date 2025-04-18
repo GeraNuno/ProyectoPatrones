@@ -1,0 +1,55 @@
+/* Sidebar animación */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background-color: white;
+    z-index: 10;
+    padding: 1rem;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .sidebar.open {
+    transform: translateX(0);
+  }
+  
+  /* Cierre */
+  .sidebar__header {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .close-icon {
+    cursor: pointer;
+    font-size: 28px;
+  }
+  
+  /* Overlay */
+  .sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    background-color: rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 9;
+  }
+  
+  .sidebar-overlay.show {
+    opacity: 1;
+    pointer-events: all;
+  }
+  
+  .sidebar-overlay.hide {
+    opacity: 0;
+    pointer-events: none;
+  }
+  

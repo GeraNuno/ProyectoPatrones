@@ -3,7 +3,6 @@
     width: 95%;
     position: sticky;
     top: 0;
-    z-index: 1000;
     border-radius: 15px;
     margin: 0 auto;
     transition:all 0.5s ease-in-out;
@@ -33,6 +32,7 @@
     align-items: center;
     justify-content: center;
     flex: 0.7;
+    font-size: x-large;
 }
 
 .nav-right{
@@ -42,8 +42,24 @@
     flex: 0.1;
 }
 
-
-
 .nav-icons{
     cursor: pointer;
 }
+
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    background-color: rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 9;
+  }
+  
+  .sidebar-overlay.show {
+    opacity: 1;
+  }

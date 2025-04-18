@@ -7,6 +7,11 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 // Rutas
 import Home from './paginas/home/Home';
 
+//Dior
+import DiorFragances from './paginas/fragancias/dior/DiorFragances';
+
+//Valentino
+import ValentinoFragances from './paginas/fragancias/valentino/ValentinoFragances';
 
 function App() {
   /*useEffect(() => {
@@ -28,6 +33,8 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home/>} />
+          <Route path="/dior" element={<DiorFragances />} />
+          <Route path="/valentino" element={<ValentinoFragances />} />
         </Routes>
       </Router>
     </>
