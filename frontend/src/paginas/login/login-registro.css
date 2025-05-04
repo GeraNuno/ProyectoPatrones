@@ -1,15 +1,15 @@
-.login-container{
+.login-registro-container{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
-    width: 100vw;
+    width: 100%;
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
 }
 
-.login-form {
+.login-registro-form {
     width: 50%;
     max-width: 400px;
     height: auto;
@@ -49,9 +49,14 @@
 .form-center input{
     width: 100%;
     padding: 10px 10px;
-    margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 20px;
+    transition: all 0.3s ease-in-out;
+}
+
+.form-center input:focus {
+    border-color: #555;
+    outline: none;
 }
 
 .btn-submit {

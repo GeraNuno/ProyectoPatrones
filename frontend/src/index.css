@@ -3,13 +3,45 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
-    
 }
 
-body {
+html, body {
     background-color: #f9f9f9;
     color: #333;
+    height: 100%;
 }
+
+/* Estilos para el mensaje de error o éxito */
+.mensaje {
+  position: absolute;
+  top: 20px;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  width: 50%;
+  
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  color: #fff;
+  font-size: 16px;
+
+  text-align: center;
+  text-transform: uppercase;
+  
+  animation: fadeIn 0.5s ease-in-out, fadeOut 0.5s ease-in-out 2s;
+  animation-fill-mode: forwards;
+  animation-delay: 0s, 1s;
+  animation-duration: 0.5s, 0.5s;
+}
+
+.exito {
+  background-color: #4caf50;
+}
+.error {
+  background-color: #f44336;
+}
+
 
 /*Animaciones*/
 

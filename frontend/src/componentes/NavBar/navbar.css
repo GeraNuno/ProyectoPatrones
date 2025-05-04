@@ -48,6 +48,17 @@
     cursor: pointer;
 }
 
+.nav-user{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    height: auto;
+    border-radius: 5%;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
 .sidebar-overlay {
     position: fixed;
     top: 0;

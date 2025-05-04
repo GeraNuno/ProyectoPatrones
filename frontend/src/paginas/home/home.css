@@ -1,5 +1,5 @@
 .main-container{
-    display: block;
+    display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
@@ -9,8 +9,9 @@
 
 .main-header, .main-content, .main-footer{
     width: 100%;
+    display: flex;
+    flex-direction: column;
     margin: 0 auto;
-    
 }
 
 .main-header{
@@ -18,25 +19,26 @@
     justify-content: center;
     background-color: #000;
     color: #fff;
+    height: auto;
 }
 
 .main-content{
-    height: 100%;
     align-items: center;
     justify-content: center;
     background-color: #fff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 60%;
     overflow-y: auto;
 }
 
 .main-footer{
     align-items: center;
     justify-content: center;
-    background-color: #000;
+    background-color: #0f150a;
     color: #fff;
-    height: 50px;
+    flex: 1;
+    height: 10vh;
 }
-
 
 .Banner{
     width: 100%;

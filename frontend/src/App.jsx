@@ -1,49 +1,58 @@
-/*import { useEffect } from 'react';
-import { socket } from './servicios/socket';*/
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
-// Rutas
 import Home from './paginas/home/Home';
 import Login from './paginas/login/Login';
 import Registro from './paginas/registro/Registro';
+import Loading from './componentes/Loader/Loading';
 
-//Dior
+//Rutas para Administrador
+import RegistroMarca from './paginas/registroMarca/registroMarca';
+import RegistroProducto from './paginas/registroProducto/RegistroProducto';
+
 import DiorFragances from './paginas/fragancias/dior/diorHome/DiorFragances';
 import DiorMen from './paginas/fragancias/dior/diorMen/DiorMen';
-//Valentino
 import ValentinoFragances from './paginas/fragancias/valentino/ValentinoFragances';
 
-function App() {
-  /*useEffect(() => {
-    socket.on('nuevoTicket', (data) => {
-      console.log('Nuevo ticket recibido:', data);
-    });
+// Nuevo componente que usará el useLocation correctamente
+function AppContent() {
+  const location = useLocation();
+  const [loading, setLoading] = useState(false);
 
-    return () => {
-      socket.off('nuevoTicket');
-    };
-  }, []);
-
-  const enviarTicket = () => {
-    socket.emit('enviarTicket', { mensaje: 'Necesito ayuda con X', usuario: 'Juan' });
-  };*/
+  useEffect(() => {
+    setLoading(true);
+    const timeout = setTimeout(() => {
+      setLoading(false);
+    }, 400);
+    return () => clearTimeout(timeout);
+  }, [location.pathname]);
 
   return (
     <>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home/>} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/registro" element={<Registro />} />
-          {/* Rutas de fragancias */}
-          <Route path="/dior" element={<DiorFragances />} />
-          <Route path="/dior/men" element={<DiorMen />} />
-          <Route path="/valentino" element={<ValentinoFragances />} />
-        </Routes>
-      </Router>
+      {loading && <Loading />}
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/registro" element={<Registro />} />
+        <Route path="/dior" element={<DiorFragances />} />
+        <Route path="/dior/men" element={<DiorMen />} />
+        <Route path="/valentino" element={<ValentinoFragances />} />
+
+        {/* Rutas para Administrador */}
+        <Route path="/registroMarca" element={<RegistroMarca />} />
+        <Route path="/registroProducto" element={<RegistroProducto />} />
+        {/* Puedes agregar más rutas aquí */}
+      </Routes>
     </>
+  );
+}
+
+// Aquí envolvemos AppContent con Router
+function App() {
+  return (
+    <Router>
+      <AppContent />
+    </Router>
   );
 }
 

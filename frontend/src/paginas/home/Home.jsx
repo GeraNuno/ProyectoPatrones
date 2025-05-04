@@ -3,7 +3,12 @@ import './home.css'
 
 import Navbar from '../../componentes/navbar/Navbar'
 
+import HomeCliente from '../../componentes/homeContent/homeCliente'
+import HomeAdmin from '../../componentes/homeContent/HomeAdmin'
+
 export default function Home() {
+    const rol = localStorage.getItem('rolUsuario'); // Obtener el rol del localStorage
+    const nombre = localStorage.getItem('nombreEmpleado'); // Obtener el nombre completo del localStorage
   return (
     <>
         <main className="main-container ">
@@ -15,10 +20,11 @@ export default function Home() {
                 </picture>
 
             </div>
+            
             <div className="main-content">
-                <h1>Bienvenido a la página de inicio</h1>
-                <p>Esta es una aplicación de ejemplo para mostrar el uso de React Router.</p>
+                {rol === 'admin' ? <HomeAdmin/> : <HomeCliente/>}
             </div>
+
             <div className="main-footer">
 
             </div>

@@ -53,15 +53,6 @@ router.post('/register', async (req, res) => {
         if (noEmpleado && !/^\d+$/.test(noEmpleado)) {
             return res.status(400).json({ message: 'El número de empleado solo puede contener dígitos' });
         }
-        if (nombre && !/^[a-zA-Z]+$/.test(nombre)) {
-            return res.status(400).json({ message: 'El nombre solo puede contener letras' });
-        }
-        if (aPaterno && !/^[a-zA-Z]+$/.test(aPaterno)) {
-            return res.status(400).json({ message: 'El apellido paterno solo puede contener letras' });
-        }
-        if (aMaterno && !/^[a-zA-Z]+$/.test(aMaterno)) {
-            return res.status(400).json({ message: 'El apellido materno solo puede contener letras' });
-        }
 
         const hashedPassword = await bcrypt.hash(password, 10);
         const newUser = new User({

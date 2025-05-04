@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import './login.css'
+import './login-registro.css'
 import { useNavigate } from 'react-router-dom'
 
 import Navbar from '../../componentes/navbar/Navbar'
@@ -29,9 +29,9 @@ export default function Login() {
             });
 
             if (response.ok) {
-                const { token } = await response.json();
-                nombrecompleto = `${data.user.nombre} ${data.user.aPaterno} ${data.user.aMaterno}`; // Concatenar los nombres y apellidos
-                localStorage.setItem('nombreEmpleado', nombrecompleto); // Guardar el nombre completo en el estado
+                const { token, user } = await response.json();
+                localStorage.setItem('nombreEmpleado', user.nombre); // Guardar el nombre completo en el estado
+                localStorage.setItem('rolUsuario', user.rolUsuario); // Guardar el tipo de empleado en el estado
                 localStorage.setItem('token', token); // Guardar token en localStorage
                 
                 setMensaje('Inicio de sesión exitoso');
@@ -65,11 +65,11 @@ export default function Login() {
 
   return (
     <>
-        <div className="login-container">
+        <div className="login-registro-container">
             <Navbar/>
-            <form className="login-form" onSubmit={handleSubmit}>
+            <form className="login-registro-form" onSubmit={handleSubmit}>
                 <div className="form-top">
-                    <h2>Iniciar Sesión</h2>
+                    <h2>INICIAR SESIÓN</h2>
                     <p>Por favor, ingresa tus credenciales</p>
                 </div>
 

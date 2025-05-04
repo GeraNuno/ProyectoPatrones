@@ -7,6 +7,7 @@ const socketIO = require('socket.io');
 
 //Rutas
 const authRoutes = require('./rutas/auth');
+const marcasRoutes = require('./rutas/marcas');
 
 dotenv.config();
 
@@ -21,18 +22,21 @@ const io = socketIO(server, {
 require('./socket')(io);
 
 app.use(cors({
-  origin: '*'
+  origin: '*',
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use('/auth', authRoutes);
+app.use('/marca', marcasRoutes);
 
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => {
     console.log('MongoDB conectado');
     server.listen(process.env.PORT || 5000, () =>
-      console.log('Servidor backend corriendo...')
+      console.log(`Servidor backend corriendo en puerto ${process.env.PORT}...`)
     );
   })
   .catch((err) => console.error(err));

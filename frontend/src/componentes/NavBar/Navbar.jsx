@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import ReorderIcon from '@mui/icons-material/Reorder';
 import PersonIcon from '@mui/icons-material/Person';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 import Sidebar from '../SideBar/Sidebar';
 
@@ -13,6 +14,8 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(false); // Para controlar la visibilidad real
   const navigate = useNavigate();
+
+  const nombre = localStorage.getItem('nombreEmpleado'); // Obtener el nombre completo del localStorage
 
   const handleToggle = () => {
     if (!isOpen) {
@@ -32,6 +35,16 @@ export default function Navbar() {
     navigate('/login');
   }
 
+  const handleLogOut = () => {
+    localStorage.removeItem('nombreEmpleado'); // Limpiar el nombre completo del localStorage
+    localStorage.removeItem('token'); // Limpiar el token del localStorage
+    
+    setTimeout(() => {
+      navigate('/'); // Redirigir a la página de inicio de sesión después de 3 segundos
+    }
+    , 3000);
+  }
+
   return (
     <>
       <div className="nav-container">
@@ -41,8 +54,14 @@ export default function Navbar() {
           </div>
           <div className="nav-center" onClick={handleHome}>VYNCE</div>
           <div className="nav-right">
-            <PersonIcon className="nav-icons" onClick={handleLogin}/>
-            <ShoppingCartIcon className="nav-icons" />
+          <ShoppingCartIcon className="nav-icons" />
+            {
+              nombre ? (
+                <LogoutIcon className="nav-icons" onClick={handleLogOut}></LogoutIcon>
+              ) : (
+                <PersonIcon className="nav-icons" onClick={handleLogin}/>
+              )
+            }
           </div>
         </nav>
       </div>
