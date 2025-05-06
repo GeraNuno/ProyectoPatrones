@@ -6,6 +6,7 @@ const marcaSchema = new mongoose.Schema({
     imgMarca: { type: String, required: true },
     imgFragH: { type: String, required: true },
     imgFragM: { type: String, required: true },
+    estatus: { type: String, default: 'ACTIVO' },
 }, { timestamps: true });
 
 module.exports = mongoose.model('Marca', marcaSchema);

@@ -1,27 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './sidebar.css';
 import CloseIcon from '@mui/icons-material/Close';
 import { Link } from 'react-router-dom';
 
-import { useNavigate } from "react-router-dom";
-
 export default function Sidebar({ onClose, isOpen }) {
-  const [openMenus, setOpenMenus] = useState({});
-  const navigate = useNavigate();
+  const rolUsuario = localStorage.getItem('rolUsuario');
+  const [marcasData, setMarcas] = useState([]);
 
-  const toggleMenu = (menuKey) => {
-    setOpenMenus((prev) => ({
-      ...prev,
-      [menuKey]: !prev[menuKey]
-    }));
-  };
-
-  const handleHome = () => {
-    onClose();
-  }
-    const handleDior = () => {
-        navigate('/dior');
-    };
+  useEffect(() => {
+    if(rolUsuario !== 'admin') {
+      const storedMarcas = localStorage.getItem('marcas');
+      
+      if (storedMarcas) {
+        // Si ya están guardadas, solo las carga
+        setMarcas(JSON.parse(storedMarcas));
+      } else {
+        // Si no hay datos guardados, los solicita y guarda
+        const fetchMarcas = async () => {
+          try {
+            const response = await fetch('http://localhost:5000/marca/listaMarcas');
+            const data = await response.json();
+            setMarcas(data);
+            localStorage.setItem('marcas', JSON.stringify(data));
+          } catch (error) {
+            console.error('Error fetching marcas:', error);
+          }
+        };
+        fetchMarcas();
+      }
+    }
+  }, []);
 
   return (
     <div className={`sidebar ${isOpen ? 'open' : ''}`}>
@@ -31,41 +39,31 @@ export default function Sidebar({ onClose, isOpen }) {
       <div className="sidebar-menu">
         <ul className="sidebar-list">
           <li className="sidebar-item">
-            <Link to="/" className="sidebar-link">Home</Link>
+            <Link to="/" onClick={onClose} className="sidebar-link">Home</Link>
           </li>
-
-          {/* Dior */}
-          <li className="sidebar-item has-submenu">
-            <div className="sidebar-link" >
-                <Link to="/dior" className="sidebar-link">Dior</Link>
-            </div>
-            <ul className={`submenu ${openMenus['dior'] ? 'open' : ''}`}>
-              {/* Fragancias */}
-              <li className="sidebar-subitem has-submenu">
-                <div className="sidebar-link" onClick={() => toggleMenu('fragancias')}>
-                  Fragancias
-                </div>
-                <ul className={`submenu ${openMenus['fragancias'] ? 'open' : ''}`}>
-                  {/* Hombre */}
-                  <li className="sidebar-subitem has-submenu">
-                    <div className="sidebar-link" onClick={() => toggleMenu('hombre')}>
-                        <Link to="/dior/men" className="subMenu-link" >Hombre</Link>
-                    </div>
-                  </li>
-                  {/* Mujer */}
-                  <li className="sidebar-subitem has-submenu">
-                    <div className="sidebar-link" onClick={() => toggleMenu('mujer')}>
-                      <Link to="/dior/women" className="subMenu-link" >Mujer</Link>
-                    </div>
-                  </li>
-                </ul>
+          { rolUsuario === 'admin' ? (
+            <>
+              <li className="sidebar-item">
+                <Link onClick={onClose} to="/registroMarca" className="sidebar-link">NUEVA MARCA</Link>
               </li>
-            </ul>
-          </li>
-
-          <li className="sidebar-item">
-            <Link to="/valentino" className="sidebar-link">Valentino</Link>
-          </li>
+              <li className="sidebar-item">
+                <Link onClick={onClose} to="/listaMarcas" className="sidebar-link">Lista Marcas</Link>
+              </li>
+              <li className="sidebar-item">
+                <Link onClick={onClose} to="/registroLinea" className="sidebar-link">NUEVA LINEA</Link>
+              </li>
+              <li className="sidebar-item">
+                <Link onClick={onClose} to="/registroProducto" className="sidebar-link">NUEVA FRAGANCIA</Link>
+              </li>
+            </>  
+          ) : 
+          <>
+            {marcasData.map((marca) => (
+              <li className="sidebar-item" key={marca._id}>
+                <Link onClick={onClose} to={`/marca/${marca.nombreMarca}`} className="sidebar-link">{marca.nombreMarca}</Link>
+              </li>
+            ))}
+          </>}
         </ul>
       </div>
     </div>

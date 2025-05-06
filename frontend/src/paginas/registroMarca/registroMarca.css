@@ -1,4 +1,4 @@
-.registroMarca-container {
+.registroMarca-container, .registroProducto-container, .registroLinea-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -7,18 +7,23 @@
 }
 
 
-.registroMarca-form {
+.registroMarca-form, .formulario-registro, .registroLinea-form {
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 80%;
   height: 80%;
+  min-height: 600px;
   padding: 20px;
   background-color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
 
   animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+.form-top {
+  text-transform: uppercase;
 }
 
 .form-content {
@@ -33,13 +38,21 @@
 .form-left, .form-right {
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  
   height: 90%;
+  max-height: 400px;
   justify-content: space-around;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.form-left::-webkit-scrollbar, .form-right::-webkit-scrollbar {
+  width: 8px;
 }
 
 .form-left {
   width: 65%;
+  padding-right: 20px;
   border-right: 1px solid #ccc;
 }
 
@@ -48,7 +61,9 @@
   padding-left: 20px;
 }
 
-.registroMarca-form input {
+.registroMarca-form input, 
+.formulario-registro input, select,
+.formulario-registro select, input {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
@@ -75,7 +90,8 @@
   resize: none;
 }
 
-.registroMarca-form input, textarea {
+.registroMarca-form input, textarea, .formulario-registro input, select,
+.registroLinea-form input, select {
   transition: border-color 0.3s ease;
   &:focus {
     border-color: #212c0e;
@@ -83,7 +99,7 @@
   }
 }
 
-.registroMarca-form button {
+.registroMarca-form button, .formulario-registro button, .registroLinea-form button {
   width: 30%;
   padding: 10px;
   background-color: #212c0e;
@@ -95,7 +111,7 @@
   text-transform: uppercase;
 }
 
-.registroMarca-form button:hover {
+.registroMarca-form button:hover, .formulario-registro button:hover, .registroLinea-form button:hover {
   background-color: #1a1f0b;
 }
 
@@ -106,7 +122,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  width: 95%;
   height: 100%;
   border: 1px dashed #ccc;
   border-radius: 5px;

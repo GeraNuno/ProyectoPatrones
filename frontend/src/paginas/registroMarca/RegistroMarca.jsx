@@ -86,9 +86,10 @@ export default function RegistroMarca() {
             if (response.ok) {
                 setMensaje("Nueva marca registrada con éxito: " + formData.nombreMarca);
                 setTipoMensaje("exito");
+                localStorage.removeItem('marcas')
                 setTimeout(() => {
                     setMensaje("");
-                    navigate('/');
+                    navigate('/listaMarcas');
                 }, 3000);
             } else {
                 setMensaje("Error al registrar la marca: " + formData.nombreMarca);

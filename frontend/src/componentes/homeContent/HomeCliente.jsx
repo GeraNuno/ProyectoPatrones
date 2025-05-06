@@ -12,6 +12,12 @@ export default function homeCliente() {
 
     const rolUsuario = localStorage.getItem('rolUsuario'); // Obtener el rol del localStorage
     
+    const handleDior = () => {
+        navigate('/marca/Dior')
+    }
+    const handleValentino = () => {
+        navigate('/marca/Valentino')
+    }
   return (
     <>
         <div className="home-container">
@@ -29,8 +35,8 @@ export default function homeCliente() {
                         className='img-Marca'/>
                 </picture>
                 <div className="card-bottom">
-                    <button className="btn-Bienvenida">Explorar Dior</button>
-                    <button className="btn-Bienvenida">Explorar Valentino</button>
+                    <button className="btn-Bienvenida" onClick={handleDior}>Explorar Dior</button>
+                    <button className="btn-Bienvenida" onClick={handleValentino}>Explorar Valentino</button>
                 </div>
             </div>
             <div className="card-Login">

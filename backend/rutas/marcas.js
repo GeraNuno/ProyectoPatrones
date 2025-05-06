@@ -52,6 +52,16 @@ router.post('/registro', upload.fields([
       res.status(500).json({ message: 'Error en el servidor' });
     }
   });
+
+router.get('/listaMarcas', async (req, res) => {
+    try {
+        const marcas = await Marca.find();
+        res.status(200).json(marcas);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error en el servidor' });
+    }
+});
   
 
 module.exports = router;

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './navbar.css';
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import ReorderIcon from '@mui/icons-material/Reorder';
 import PersonIcon from '@mui/icons-material/Person';
@@ -14,6 +14,7 @@ export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(false); // Para controlar la visibilidad real
   const navigate = useNavigate();
+  const location = useLocation(); // Obtener la ubicación actual
 
   const nombre = localStorage.getItem('nombreEmpleado'); // Obtener el nombre completo del localStorage
 
@@ -38,11 +39,16 @@ export default function Navbar() {
   const handleLogOut = () => {
     localStorage.removeItem('nombreEmpleado'); // Limpiar el nombre completo del localStorage
     localStorage.removeItem('token'); // Limpiar el token del localStorage
-    
+    localStorage.removeItem('rolUsuario'); // Limpiar el rol de usuario del localStorage
     setTimeout(() => {
-      navigate('/'); // Redirigir a la página de inicio de sesión después de 3 segundos
+      if(location.pathname !== '/') {
+        navigate('/'); // Redirigir a la página de inicio
+      }
+      else {
+        window.location.reload(); // Recargar la página si ya estás en la página de inicio
+      }
     }
-    , 3000);
+    , 1000);
   }
 
   return (
