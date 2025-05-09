@@ -11,6 +11,10 @@ html, body {
     height: 100%;
 }
 
+::-webkit-scrollbar {
+    width: 0px;
+}
+
 /* Estilos para el mensaje de error o éxito */
 .mensaje {
   position: absolute;

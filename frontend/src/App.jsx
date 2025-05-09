@@ -6,14 +6,21 @@ import Login from './paginas/login/Login';
 import Registro from './paginas/registro/Registro';
 import Loading from './componentes/Loader/Loading';
 
+//Rutas para Cliente
+import LineasPerfumes from './paginas/lineasPerfumes/lineasPerfumes';
+import ProductosLinea from './paginas/productosLinea/ProductosLinea';
+
 //Rutas para marcas de fragancias
 import MarcaHome from './paginas/marcaHome/MarcaHome';
 import ListaMarcas from './paginas/listaMarcas/ListaMarcas';
 
 //Rutas para Administrador
-import RegistroMarca from './paginas/registroMarca/registroMarca';
+import RegistroMarca from './paginas/registroMarca/RegistroMarca';
 import RegistroLinea from './paginas/registroLinea/RegistroLinea';
 import RegistroProducto from './paginas/registroProducto/RegistroProducto';
+
+import ListaLineas from './paginas/listaLineas/ListaLineas';
+import ListaProductos from './paginas/listaProductos/ListaProductos';
 
 //import DiorFragances from './paginas/fragancias/dior/diorHome/DiorFragances';
 //import ValentinoFragances from './paginas/fragancias/valentino/ValentinoFragances';
@@ -39,16 +46,17 @@ function AppContent() {
         <Route path="/login" element={<Login />} />
         <Route path="/registro" element={<Registro />} />
 
-        {/* Rutas para marca de fragancias */}
+        {/* Rutas para Cliente */}
         <Route path="/marca/:nombreMarca" element={<MarcaHome />} />
+        <Route path="/lineasPerfumes/:nombreMarca/:tipoLinea" element={<LineasPerfumes />} />
+        <Route path="/:nombreMarca/:nombreLinea/productos" element={<ProductosLinea />} />
+
+        {/* Rutas para Administrador */}
         <Route path="/listaMarcas" element={<ListaMarcas />} />
         <Route path="/registroLinea" element={<RegistroLinea />} />
         <Route path="/registroProducto" element={<RegistroProducto />} />
-
-        {/*<Route path="/dior" element={<DiorFragances />} />
-        <Route path="/valentino" element={<ValentinoFragances />} />*/}
-
-        {/* Rutas para Administrador */}
+        <Route path="/listaLineas" element={<ListaLineas />} />
+        <Route path="/listaProductos" element={<ListaProductos />} />
         <Route path="/registroMarca" element={<RegistroMarca />} />
         <Route path="/registroProducto" element={<RegistroProducto />} />
         {/* Puedes agregar más rutas aquí */}

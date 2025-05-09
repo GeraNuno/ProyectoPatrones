@@ -8,6 +8,8 @@ const socketIO = require('socket.io');
 //Rutas
 const authRoutes = require('./rutas/auth');
 const marcasRoutes = require('./rutas/marcas');
+const lineasRoutes = require('./rutas/linea');
+const productosRoutes = require('./rutas/productos');
 
 dotenv.config();
 
@@ -31,6 +33,8 @@ app.use(express.json());
 
 app.use('/auth', authRoutes);
 app.use('/marca', marcasRoutes);
+app.use('/linea', lineasRoutes);
+app.use('/producto', productosRoutes);
 
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => {

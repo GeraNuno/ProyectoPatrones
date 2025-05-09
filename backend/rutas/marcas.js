@@ -64,4 +64,14 @@ router.get('/listaMarcas', async (req, res) => {
 });
   
 
+router.get('/nombreMarcas', async (req, res) => {
+    try {
+        const marcas = await Marca.find({}, { nombreMarca: 1, _id: 0 });
+        res.status(200).json(marcas);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error en el servidor' });
+    }
+});
+
 module.exports = router;

@@ -1,7 +1,7 @@
 import React from 'react'
 import './home.css' 
 
-import Navbar from '../../componentes/navbar/Navbar'
+import Navbar from '../../componentes/navbar/navbar'
 
 import HomeCliente from '../../componentes/homeContent/homeCliente'
 import HomeAdmin from '../../componentes/homeContent/HomeAdmin'

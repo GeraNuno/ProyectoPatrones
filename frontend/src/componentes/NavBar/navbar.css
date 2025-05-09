@@ -1,11 +1,13 @@
 .nav-container {
     width: 100%;
-    position: absolute; /* o usa fixed si quieres que esté siempre visible al hacer scroll */
+    position: fixed; /* o usa fixed si quieres que esté siempre visible al hacer scroll */
     top: 0;
     left: 0;
     padding: 10px 40px;
     background-color: transparent;
     transition: all 0.5s ease-in-out;
+    backdrop-filter: blur(2px);
+    z-index: 1000;
 }
 
 .nav-container:hover {

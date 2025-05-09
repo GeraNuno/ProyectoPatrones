@@ -1,0 +1,83 @@
+.lineasPerfumes-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.lineasPerfumes-header {
+    margin-top: 3%;
+    padding: 2%;
+    display: flex;
+    justify-content: center;
+}
+
+.lineasPerfumes-opciones {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding-top: 40px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.lineasPerfumes-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+/* NUEVO: contenedor para posicionar el texto sobre la imagen */
+.linea-imagen-contenedor {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+/* ACTUALIZADO: el nombre ahora se posiciona en el centro y aparece al hacer hover */
+.nombre-linea {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3em;
+    text-transform: uppercase;
+    text-decoration: double;
+    text-align:center;
+    color: transparent;
+    transition: all 0.3s ease-in-out;
+    z-index: 1;
+    pointer-events: none;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+/* Mostrar nombre al hacer hover */
+.linea-imagen-contenedor:hover .nombre-linea{
+    color: #fff;
+}
+
+/* Imagen base */
+.img-lineaPerfume {
+    width: 100%;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6);
+    cursor: pointer;
+    margin: 2% 0;
+}
+
+/* Imagen al hacer hover */
+.linea-imagen-contenedor:hover .img-lineaPerfume {
+    transform: scale(1.05);
+    filter: brightness(0.5);
+    z-index: 0;
+}
+
+.handle {
+    cursor: pointer;
+}

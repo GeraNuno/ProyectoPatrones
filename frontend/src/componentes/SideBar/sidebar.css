@@ -54,12 +54,16 @@
     pointer-events: none;
   }
   
-
+  .sidebar-menu {
+    display: flex;
+    flex-direction: column;
+    height: 90%;
+  }
 
   .sidebar-list{
     display: flex;
     flex-direction: column;
-    margin-top: 2rem;
+    gap: 1rem; /* Espacio vertical entre ítems */
   }
 
   .sidebar-item{

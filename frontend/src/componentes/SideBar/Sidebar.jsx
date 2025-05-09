@@ -4,6 +4,15 @@ import CloseIcon from '@mui/icons-material/Close';
 import { Link } from 'react-router-dom';
 
 export default function Sidebar({ onClose, isOpen }) {
+  const [openMenus, setOpenMenus] = useState({});
+
+  const toggleMenu = (menuKey) => {
+    setOpenMenus((prev) => ({
+      ...prev,
+      [menuKey]: !prev[menuKey]
+    }));
+  };
+
   const rolUsuario = localStorage.getItem('rolUsuario');
   const [marcasData, setMarcas] = useState([]);
 
@@ -43,17 +52,58 @@ export default function Sidebar({ onClose, isOpen }) {
           </li>
           { rolUsuario === 'admin' ? (
             <>
-              <li className="sidebar-item">
-                <Link onClick={onClose} to="/registroMarca" className="sidebar-link">NUEVA MARCA</Link>
+              <li className="sidebar-item has-submenu">
+                <div className="sidebar-link" >
+                    <Link className="sidebar-link">Marcas</Link>
+                </div>
+                <ul className={`submenu ${openMenus['marcas'] ? 'open' : ''}`}>
+                  
+                  <div className="sidebar-subitem has-submenu">
+                    <li className="sidebar-item">
+                      <Link onClick={onClose} to="/registroMarca" className="sidebar-link">NUEVA MARCA</Link>
+                    </li>
+                    <li className="sidebar-item">
+                      <Link onClick={onClose} to="/listaMarcas" className="sidebar-link">Lista Marcas</Link>
+                    </li>
+                  </div>
+
+                </ul>
               </li>
-              <li className="sidebar-item">
-                <Link onClick={onClose} to="/listaMarcas" className="sidebar-link">Lista Marcas</Link>
+
+              <li className="sidebar-item has-submenu">
+                <div className="sidebar-link" >
+                    <Link className="sidebar-link">Líneas</Link>
+                </div>
+                <ul className={`submenu ${openMenus['lineas'] ? 'open' : ''}`}>
+                  
+                  <div className="sidebar-subitem has-submenu">
+                    <li className="sidebar-item">
+                      <Link onClick={onClose} to="/registroLinea" className="sidebar-link">NUEVA LINEA</Link>
+                    </li>
+                    <li className="sidebar-item">
+                      <Link onClick={onClose} to="/listaLineas" className="sidebar-link">Lista Lineas</Link>
+                    </li>
+                  </div>
+                  
+                </ul>
               </li>
-              <li className="sidebar-item">
-                <Link onClick={onClose} to="/registroLinea" className="sidebar-link">NUEVA LINEA</Link>
-              </li>
-              <li className="sidebar-item">
-                <Link onClick={onClose} to="/registroProducto" className="sidebar-link">NUEVA FRAGANCIA</Link>
+
+              <li className="sidebar-item has-submenu">
+                <div className="sidebar-link" >
+                    <Link className="sidebar-link">Productos</Link>
+                </div>
+                <ul className={`submenu ${openMenus['productos'] ? 'open' : ''}`}>
+                  
+                  <div className="sidebar-subitem has-submenu">
+                    <li className="sidebar-item">
+                      <Link onClick={onClose} to="/registroProducto" className="sidebar-link">NUEVA FRAGANCIA</Link>
+                    </li>
+                    <li className="sidebar-item">
+                      <Link onClick={onClose} to="/listaProductos" className="sidebar-link">Lista Productos</Link>
+                    </li>
+                  </div>
+                  
+                </ul>
               </li>
             </>  
           ) : 
