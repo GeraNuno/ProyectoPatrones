@@ -6,8 +6,7 @@
     padding: 10px 40px;
     background-color: transparent;
     transition: all 0.5s ease-in-out;
-    backdrop-filter: blur(2px);
-    z-index: 1000;
+    z-index: 10;
 }
 
 .nav-container:hover {
@@ -36,6 +35,9 @@
     justify-content: center;
     flex: 0.7;
     font-size: x-large;
+}
+
+.vynce{
     cursor: pointer;
 }
 
@@ -72,7 +74,7 @@
     background-color: rgba(0, 0, 0, 0.3);
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
-    z-index: 9;
+    z-index: 999;
   }
   
   .sidebar-overlay.show {

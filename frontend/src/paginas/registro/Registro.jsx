@@ -3,7 +3,7 @@ import '../login/login-registro.css'
 
 import { useNavigate } from 'react-router-dom'
 
-import Navbar from '../../componentes/navbar/Navbar'
+import Navbar from '../../componentes/navbar/navbar'
 
 export default function Registro() {
   const navigate = useNavigate()
@@ -16,7 +16,6 @@ export default function Registro() {
     correo: "",
     password: "",
     rolUsuario: "user",
-    noEmpleado: "",
     telefono: ""
   });
 
@@ -29,16 +28,10 @@ export default function Registro() {
   }
 
   const validarDatos = () => {
-    const { nombre, aPaterno, aMaterno, correo, password, noEmpleado, telefono } = datosUsuario;
+    const { nombre, aPaterno, aMaterno, correo, password, telefono } = datosUsuario;
   
-    if (!nombre || !aPaterno || !aMaterno || !correo || !password || !noEmpleado || !telefono) {
+    if (!nombre || !aPaterno || !aMaterno || !correo || !password || !telefono) {
       setMensaje("Todos los campos son obligatorios.");
-      setTipoMensaje("error");
-      return false;
-    }
-  
-    if (!/^\d+$/.test(noEmpleado)) {
-      setMensaje("El número de empleado solo puede contener dígitos.");
       setTipoMensaje("error");
       return false;
     }
@@ -146,16 +139,6 @@ export default function Registro() {
                 name="aMaterno" 
                 placeholder='Apellido Materno'
                 value={datosUsuario.aMaterno} 
-                onChange={handleChange} 
-              />
-            </div>
-            <div className="form-center">
-              <input 
-                type="text" 
-                id="noEmpleado" 
-                name="noEmpleado" 
-                placeholder='No. Empleado'
-                value={datosUsuario.noEmpleado} 
                 onChange={handleChange} 
               />
             </div>

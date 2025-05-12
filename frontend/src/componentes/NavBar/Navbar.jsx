@@ -9,6 +9,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import LogoutIcon from '@mui/icons-material/Logout';
 
 import Sidebar from '../SideBar/Sidebar';
+import Carrito from '../Carrito/Carrito';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,6 +26,21 @@ export default function Navbar() {
     } else {
       setIsOpen(false); // inicia la animación de salida
       setTimeout(() => setIsVisible(false), 300); // espera que termine y desmonta
+    }
+  };
+
+  // Agregar nuevos estados para el carrito
+  const [isCarritoOpen, setIsCarritoOpen] = useState(false);
+  const [isCarritoVisible, setIsCarritoVisible] = useState(false);
+
+  const handleToggleCarrito = () => {
+    if (!isCarritoOpen) {
+      setIsCarritoVisible(true);
+      setTimeout(() => 
+        setIsCarritoOpen(true), 100);
+    } else {
+      setIsCarritoOpen(false);
+      setTimeout(() => setIsCarritoVisible(false), 300);
     }
   };
 
@@ -58,9 +74,11 @@ export default function Navbar() {
           <div className="nav-left">
             <ReorderIcon className="nav-icons" onClick={handleToggle} />
           </div>
-          <div className="nav-center" onClick={handleHome}>VYNCE</div>
+          <div className="nav-center">
+            <div className="vynce" onClick={handleHome}>VYNCE</div>
+          </div>
           <div className="nav-right">
-          <ShoppingCartIcon className="nav-icons" />
+          <ShoppingCartIcon className="nav-icons" onClick={handleToggleCarrito} />
             {
               nombre ? (
                 <LogoutIcon className="nav-icons" onClick={handleLogOut}></LogoutIcon>
@@ -78,6 +96,16 @@ export default function Navbar() {
           <div
             className={`sidebar-overlay ${isOpen ? 'show' : 'hide'}`}
             onClick={handleToggle}
+          />
+        </>
+      )}
+
+      {isCarritoVisible && (
+        <>
+          <Carrito isOpen={isCarritoOpen} onClose={handleToggleCarrito} />
+          <div
+            className={`sidebar-overlay ${isCarritoOpen ? 'show' : 'hide'}`}
+            onClick={handleToggleCarrito}
           />
         </>
       )}

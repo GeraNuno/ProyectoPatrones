@@ -1,0 +1,129 @@
+.carrito{
+    position: fixed;
+    top: 20px;
+    right: 0;
+    width: 500px;
+    height: 90%;
+    background-color: white;
+    z-index: 1002;
+    margin: 20px 0 20px 0;
+    padding: 10px;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+}
+
+.carrito.open {
+    transform: translateX(0);
+}
+
+.carritoHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    text-transform: uppercase;
+}
+
+.cerrarCarrito {
+    cursor: pointer;
+}
+
+.carrito-container {
+    display: flex;
+    flex-direction: column;
+    height: 90%;
+    justify-content: space-between;
+}
+
+.carrito-productos{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Espacio vertical entre ítems */
+    overflow-y: auto; /* Desplazamiento vertical */
+    max-height: 80%; /* Altura máxima del contenedor */   
+}
+
+.carrito-productos h2{
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    text-align: center;
+    text-transform: uppercase;
+    position: fixed;
+    z-index: 1;
+    background-color: white;
+}
+
+.carrito-cantidad{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin: 10px 0 0 10px;
+}
+
+.carrito-resumen{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* Espacio vertical entre ítems */
+    height: 15%;
+}
+
+.carrito-total{
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+}
+
+button.realizaPedido{
+    background-color: #000000; 
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button.realizaPedido:hover {
+    background-color: #2e3417; /* Verde más oscuro */
+}
+
+
+
+/* Datos de los productos en el carrito */
+.carrito-producto {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+    justify-content: space-between;
+}
+
+.carrito-info {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 10px 0 0 10px;
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.imgCarrito{
+    width: 150px;
+    height: auto;
+    border-radius: 5%;
+}
+
+.eliminarProducto{
+    cursor: pointer;
+    font-size: 1.5rem;
+}

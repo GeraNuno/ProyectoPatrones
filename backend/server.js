@@ -10,6 +10,7 @@ const authRoutes = require('./rutas/auth');
 const marcasRoutes = require('./rutas/marcas');
 const lineasRoutes = require('./rutas/linea');
 const productosRoutes = require('./rutas/productos');
+const carritoRoutes = require('./rutas/carrito');
 
 dotenv.config();
 
@@ -25,7 +26,7 @@ require('./socket')(io);
 
 app.use(cors({
   origin: '*',
-  methods: ['GET', 'POST'],
+  methods: '*',
   allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 app.use(express.urlencoded({ extended: true }));
@@ -35,6 +36,7 @@ app.use('/auth', authRoutes);
 app.use('/marca', marcasRoutes);
 app.use('/linea', lineasRoutes);
 app.use('/producto', productosRoutes);
+app.use('/carrito', carritoRoutes);
 
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => {

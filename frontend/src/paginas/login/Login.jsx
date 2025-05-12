@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import './login-registro.css'
 import { useNavigate } from 'react-router-dom'
 
-import Navbar from '../../componentes/navbar/Navbar'
+import Navbar from '../../componentes/navbar/navbar'
 
 export default function Login() {
     const navigate = useNavigate();
-    const [noEmpleado, setNoEmpleado] = useState('');
+    const [correo, setCorreo] = useState('');
     const [password, setPassword] = useState('');
 
     const [mensaje, setMensaje] = useState('');
@@ -25,7 +25,7 @@ export default function Login() {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ noEmpleado, password }),
+                body: JSON.stringify({ correo, password }),
             });
 
             if (response.ok) {
@@ -33,7 +33,8 @@ export default function Login() {
                 localStorage.setItem('nombreEmpleado', user.nombre); // Guardar el nombre completo en el estado
                 localStorage.setItem('rolUsuario', user.rolUsuario); // Guardar el tipo de empleado en el estado
                 localStorage.setItem('token', token); // Guardar token en localStorage
-                
+                localStorage.setItem('userId', user.userid); // Guardar el id del usuario en el estado
+
                 setMensaje('Inicio de sesión exitoso');
                 setTipoMensaje('exito');
                 setTimeout(() => {
@@ -74,7 +75,7 @@ export default function Login() {
                 </div>
 
                 <div className="form-center">
-                    <input type="text" id="noEmpleado" placeholder="No. Empleado" name="noEmpleado" value={noEmpleado} onChange={(e) => setNoEmpleado(e.target.value)} required />
+                    <input type="text" id="noEmpleado" placeholder="Correo Electrónico" name="noEmpleado" value={correo} onChange={(e) => setCorreo(e.target.value)} required />
                 </div>
                 <div className="form-center">
                     <input type="password" id="password" placeholder="Contraseña" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required />

@@ -3,7 +3,7 @@ import './registroMarca.css'
 
 import { useNavigate, useLocation } from 'react-router-dom'
 
-import Navbar from '../../componentes/navbar/Navbar'
+import Navbar from '../../componentes/navbar/navbar'
 
 
 export default function RegistroMarca() {

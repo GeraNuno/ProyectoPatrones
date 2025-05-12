@@ -100,7 +100,7 @@
 }
 
 .registroMarca-form button, .formulario-registro button, .registroLinea-form button {
-  width: 30%;
+  width: 100%;
   padding: 10px;
   background-color: #212c0e;
   color: #fff;
@@ -140,4 +140,22 @@ input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+
+.presentacion-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 10px;
+}
+
+.presentacionHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  right: 0;
 }

@@ -2,19 +2,19 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Navbar from '../../componentes/navbar/navbar'
 
+import DeleteIcon from '@mui/icons-material/Delete';
+
 export default function RegistroProducto() {
   const [mensaje, setMensaje] = useState('')
   const [tipoMensaje, setTipoMensaje] = useState('')
   const [nombresMarcas, setNombresMarcas] = useState([])
   const [nombresLineas, setNombresLineas] = useState([])
-  const [imagenes, setImagenes] = useState([])
 
   const [formData, setFormData] = useState({
     nombreProducto: '',
     marcaProducto: '',
     lineaProducto: '',
-    precioProducto: '',
-    stockProducto: '',
+    presentaciones: [{ mililitros: '', precio: '', stockProducto: '', imagenes: [] }]
   })
 
   const navigate = useNavigate()
@@ -29,7 +29,6 @@ export default function RegistroProducto() {
         console.error('Error obteniendo marcas:', err)
       }
     }
-
     fetchNombresMarcas()
   }, [])
 
@@ -44,14 +43,8 @@ export default function RegistroProducto() {
         console.error('Error obteniendo líneas:', err)
       }
     }
-
     fetchLineasPorMarca()
   }, [formData.marcaProducto])
-
-  const handleFileChange = (e) => {
-    const files = Array.from(e.target.files)
-    setImagenes(files)
-  }
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -61,54 +54,87 @@ export default function RegistroProducto() {
     }))
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-
-    const form = new FormData()
-    form.append('nombreProducto', formData.nombreProducto)
-    form.append('marcaProducto', formData.marcaProducto)
-    form.append('lineaProducto', formData.lineaProducto)
-    form.append('precioProducto', parseFloat(formData.precioProducto))
-    form.append('stockProducto', parseInt(formData.stockProducto, 10))
-
-    imagenes.forEach(img => {
-      form.append('imagenesProducto', img)
-    })
-
-    try {
-      const res = await fetch('http://localhost:5000/producto/registroProducto', {
-        method: 'POST',
-        body: form
-      })
-
-      const data = await res.json()
-
-      if (res.ok) {
-        setTipoMensaje('exito')
-        setMensaje(data.message)
-        setFormData({
-          nombreProducto: '',
-          marcaProducto: '',
-          lineaProducto: '',
-          precioProducto: '',
-          stockProducto: '',
-        })
-        setImagenes([])
-
-        setTimeout(() => {
-          setMensaje('')
-          navigate('/listaProductos')
-        }, 3000)
-      } else {
-        setTipoMensaje('error')
-        setMensaje(data.error || 'Error al registrar el producto')
-      }
-    } catch (err) {
-      console.error('Error:', err)
-      setTipoMensaje('error')
-      setMensaje('Error al registrar el producto')
+  const handlePresentacionChange = (index, field, value) => {
+    const nuevas = [...formData.presentaciones]
+    if (field === 'imagenes') {
+      nuevas[index][field] = Array.from(value.target.files)
+    } else {
+      nuevas[index][field] = value
     }
+    setFormData(prev => ({
+      ...prev,
+      presentaciones: nuevas
+    }))
   }
+
+  const agregarPresentacion = () => {
+    setFormData(prev => ({
+      ...prev,
+      presentaciones: [...prev.presentaciones, { mililitros: '', precio: '', stockProducto: '', imagenes: [] }]
+    }))
+  }
+
+  const eliminarPresentacion = (index) => {
+    const nuevas = formData.presentaciones.filter((_, i) => i !== index)
+    setFormData(prev => ({ ...prev, presentaciones: nuevas }))
+  }
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  const form = new FormData();
+  form.append('nombreProducto', formData.nombreProducto);
+  form.append('marcaProducto', formData.marcaProducto);
+  form.append('lineaProducto', formData.lineaProducto);
+
+  const presentacionesData = formData.presentaciones.map((pres, i) => {
+    // Asociar imágenes con su índice de presentación
+    pres.imagenes.forEach((img) => {
+      form.append(`imagenesPresentaciones_${i}`, img);
+    });
+    return {
+      mililitros: pres.mililitros,
+      precio: pres.precio,
+      stockProducto: pres.stockProducto,
+    };
+  });
+
+  form.append('presentaciones', JSON.stringify(presentacionesData));
+
+  try {
+    const res = await fetch('http://localhost:5000/producto/registroProducto', {
+      method: 'POST',
+      body: form
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      setTipoMensaje('exito');
+      setMensaje(data.message);
+      setFormData({
+        nombreProducto: '',
+        marcaProducto: '',
+        lineaProducto: '',
+        stockProducto: '',
+        presentaciones: [{ mililitros: '', precio: '', imagenes: [] }]
+      });
+
+      setTimeout(() => {
+        setMensaje('');
+        navigate('/listaProductos');
+      }, 3000);
+    } else {
+      setTipoMensaje('error');
+      setMensaje(data.error || 'Error al registrar el producto');
+    }
+  } catch (err) {
+    console.error('Error:', err);
+    setTipoMensaje('error');
+    setMensaje('Error al registrar el producto');
+  }
+};
+
 
   return (
     <div className="registroProducto-container">
@@ -155,45 +181,60 @@ export default function RegistroProducto() {
               ))}
             </select>
 
-            <input
-              type="number"
-              name="precioProducto"
-              placeholder="Precio del Producto"
-              value={formData.precioProducto}
-              onChange={handleChange}
-              step="0.01"
-              min="0"
-              required
-            />
+            {formData.presentaciones.map((pres, i) => (
+              <div key={i} className="presentacion-group">
+                <div className="presentacionHeader">
+                  {formData.presentaciones.length > 1 && (
+                    <DeleteIcon onClick={() => eliminarPresentacion(i)} />
+                  )}
+                </div>
+                <input
+                  type="number"
+                  placeholder="Mililitros"
+                  value={pres.mililitros}
+                  onChange={(e) => handlePresentacionChange(i, 'mililitros', e.target.value)}
+                  required
+                />
+                <input
+                  type="number"
+                  placeholder="Precio"
+                  value={pres.precio}
+                  onChange={(e) => handlePresentacionChange(i, 'precio', e.target.value)}
+                  required
+                />
+                <input
+                  type="number"
+                  name="stockProducto"
+                  placeholder="Cantidad en Stock"
+                  value={pres.stockProducto}
+                  onChange={(e) => handlePresentacionChange(i, 'stockProducto', e.target.value)}
+                  min="0"
+                  required
+                />
+                <input
+                  type="file"
+                  multiple
+                  accept="image/*"
+                  onChange={(e) => handlePresentacionChange(i, 'imagenes', e)}
+                  required
+                />
+              </div>
+            ))}
+            <button type="button" className='agregarPresentacion' onClick={agregarPresentacion}>Agregar presentación</button>
 
-            <input
-              type="number"
-              name="stockProducto"
-              placeholder="Cantidad en Stock"
-              value={formData.stockProducto}
-              onChange={handleChange}
-              min="0"
-              required
-            />
 
-            <label>Imágenes del Producto</label>
-            <input
-              type="file"
-              multiple
-              accept="image/*"
-              onChange={handleFileChange}
-            />
           </div>
 
           <div className="form-right">
-            {imagenes.map((img, index) => (
-              <div key={index} className="image-container">
+            {formData.presentaciones.map((pres, i) => (
+              pres.imagenes?.map((img, j) => (
                 <img
+                  key={`${i}-${j}`}
                   src={URL.createObjectURL(img)}
-                  alt={`Preview ${index}`}
+                  alt={`Preview ${i}-${j}`}
                   className="event-image"
                 />
-              </div>
+              ))
             ))}
           </div>
         </div>
