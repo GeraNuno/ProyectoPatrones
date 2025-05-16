@@ -27,46 +27,74 @@ export default function Carrito({ onClose, isOpen }) {
     if (isOpen && usuarioId) obtenerProductos();
   }, [isOpen, usuarioId]);
 
-  const actualizarCantidad = async (idProducto, mililitros, nuevaCantidad) => {
-    try {
-      await fetch(`http://localhost:5000/carrito/actualizar`, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ usuarioId, idProducto, mililitros, nuevaCantidad })
-      });
+const actualizarCantidad = async (idProducto, indexPresentacion, nuevaCantidad) => {
+  try {
+    await fetch(`http://localhost:5000/carrito/actualizar`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ usuarioId, idProducto, indexPresentacion, nuevaCantidad })
+    });
 
-      setProductos(prev =>
-        prev.map(p =>
-          p.idProducto === idProducto && p.mililitros === mililitros
-            ? { ...p, cantidad: nuevaCantidad }
-            : p
-        )
-      );
-    } catch (err) {
-      console.error('Error al actualizar cantidad:', err);
-    }
-  };
+    setProductos(prev =>
+      prev.map(p =>
+        p.idProducto === idProducto && p.indexPresentacion === indexPresentacion
+          ? { ...p, cantidad: nuevaCantidad }
+          : p
+      )
+    );
+  } catch (err) {
+    console.error('Error al actualizar cantidad:', err);
+  }
+};
 
-  const eliminarProducto = async (idProducto, mililitros) => {
-    try {
-      await fetch(`http://localhost:5000/carrito/eliminar`, {
-        method: 'DELETE',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ usuarioId, idProducto, mililitros })
-      });
+const eliminarProducto = async (idProducto, indexPresentacion) => {
+  try {
+    await fetch(`http://localhost:5000/carrito/eliminar`, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ usuarioId, idProducto, indexPresentacion })
+    });
 
-      setProductos(prev =>
-        prev.filter(p => !(p.idProducto === idProducto && p.mililitros === mililitros))
-      );
-    } catch (err) {
-      console.error('Error al eliminar producto:', err);
-    }
-  };
+    setProductos(prev =>
+      prev.filter(p => !(p.idProducto === idProducto && p.indexPresentacion === indexPresentacion))
+    );
+  } catch (err) {
+    console.error('Error al eliminar producto:', err);
+  }
+};
+
 
   const total = productos.reduce(
     (acc, p) => acc + (p.precioProducto || 0) * (p.cantidad || 1),
     0
   );
+
+  useEffect(() => {
+    const obtenerIdCarrito = async () => {
+      try {
+        const res = await fetch(`http://localhost:5000/carrito/obtenerIdCarrito/${usuarioId}`);
+        const data = await res.json();
+        if (data && data.idCarrito) {
+          setIdCarrito(data.idCarrito);
+        }
+      } catch (err) {
+        console.error('Error al obtener ID del carrito:', err);
+      }
+    };
+    obtenerIdCarrito();
+  }, [usuarioId]);
+  const [idCarrito, setIdCarrito] = useState(null);
+    
+
+  const handleConfirmarCompra = () => {
+    if (productos.length > 0) {
+      navigate(`/confirmarCompra/${idCarrito}`);
+    } else {
+      alert('No hay productos en el carrito');
+    }
+  }
+
+
 
   return (
     <div className={`carrito ${isOpen ? 'open' : ''}`}>
@@ -78,6 +106,10 @@ export default function Carrito({ onClose, isOpen }) {
 
       <div className="carrito-container">
         <div className="carrito-productos">
+          {productos.length === 0 && (
+            <p className="carrito-vacio">Tu carrito está vacío.</p>
+          )}
+
           {productos.map((producto, index) => (
             <div className="carrito-producto" key={index}>
               <img
@@ -86,10 +118,11 @@ export default function Carrito({ onClose, isOpen }) {
                 className="imgCarrito"
               />
               <div className="carrito-info">
-                {producto.nombreProducto} - {producto.mililitros} ml
+                <b>{producto.nombreProducto}</b>
+                {producto.mililitros} ml
                 <DeleteIcon
                   className="eliminarProducto"
-                  onClick={() => eliminarProducto(producto.idProducto, producto.mililitros)}
+                  onClick={() => eliminarProducto(producto.idProducto, producto.indexPresentacion)}
                 />
               </div>
               <div className="carrito-cantidad">
@@ -99,11 +132,11 @@ export default function Carrito({ onClose, isOpen }) {
                   onChange={(e) =>
                     actualizarCantidad(
                       producto.idProducto,
-                      producto.mililitros,
+                      producto.indexPresentacion,
                       parseInt(e.target.value)
                     )
                   }
-                >
+                  >
                   {[...Array(5).keys()].map(i => (
                     <option key={i + 1} value={i + 1}>
                       {i + 1}
@@ -121,7 +154,7 @@ export default function Carrito({ onClose, isOpen }) {
             <p>${total.toFixed(2)}</p>
           </div>
           <div className="carritoBotones">
-            <button className="realizaPedido">CONFIRMAR COMPRA</button>
+            <button className="realizaPedido" onClick={handleConfirmarCompra}>CONFIRMAR COMPRA</button>
           </div>
         </div>
       </div>

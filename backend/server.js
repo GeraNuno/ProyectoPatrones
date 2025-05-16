@@ -11,6 +11,7 @@ const marcasRoutes = require('./rutas/marcas');
 const lineasRoutes = require('./rutas/linea');
 const productosRoutes = require('./rutas/productos');
 const carritoRoutes = require('./rutas/carrito');
+const pedidosRoutes = require('./rutas/pedido');
 
 dotenv.config();
 
@@ -37,6 +38,7 @@ app.use('/marca', marcasRoutes);
 app.use('/linea', lineasRoutes);
 app.use('/producto', productosRoutes);
 app.use('/carrito', carritoRoutes);
+app.use('/pedido', pedidosRoutes);
 
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => {

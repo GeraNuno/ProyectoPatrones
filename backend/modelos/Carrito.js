@@ -3,13 +3,13 @@ const mongoose = require('mongoose');
 const productoCarritoSchema = new mongoose.Schema({
     idProducto: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Producto',
+        ref: 'Productos',
         required: true,
     },
-    nombreProducto: String,
-    mililitros: Number,
-    precioProducto: Number,
-    imagenProducto: String,
+    tipoPresentacion: {
+        type: Number, // el índice de la presentación en el array `presentaciones`
+        required: true,
+    },
     cantidad: {
         type: Number,
         default: 1,

@@ -10,6 +10,7 @@ import Loading from './componentes/Loader/Loading';
 import LineasPerfumes from './paginas/lineasPerfumes/lineasPerfumes';
 import ProductosLinea from './paginas/productosLinea/ProductosLinea';
 import PaginaProducto from './paginas/paginaProducto/PaginaProducto';
+import ConfirmarCompra from './paginas/confirmarCompra/ConfirmarCompra';
 
 //Rutas para marcas de fragancias
 import MarcaHome from './paginas/marcaHome/MarcaHome';
@@ -53,6 +54,7 @@ function AppContent() {
         <Route path="/lineasPerfumes/:nombreMarca/:tipoLinea" element={<LineasPerfumes />} />
         <Route path="/:nombreMarca/:nombreLinea/productos" element={<ProductosLinea />} />
         <Route path="/producto/:idProducto" element={<PaginaProducto />} />
+        <Route path="/confirmarCompra/:idCarrito" element={<ConfirmarCompra />} />
 
         {/* Rutas para Administrador */}
         <Route path="/listaMarcas" element={<ListaMarcas />} />

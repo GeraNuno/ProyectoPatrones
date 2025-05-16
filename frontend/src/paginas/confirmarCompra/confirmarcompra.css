@@ -1,0 +1,137 @@
+.confirmarCompra-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  margin: 0 auto;
+  width: 100%;
+  height: 100vh;
+}
+
+.formularioDireccion {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.formHeadder {
+  display: flex;
+  flex-direction: row;
+  text-transform: uppercase;
+}
+
+.header-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.formBody {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.datosCarrito {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  height: 100%;
+  overflow-y: auto;
+  max-height: 500px;
+}
+
+.productoCarrito {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 10px;
+  border-right: 1px solid #ccc;
+  
+}
+
+.imgProductoCompra {
+  width: 30%;
+  height: auto;
+}
+
+.productoDetalles {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px;
+}
+
+.datosIzq{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 60%;
+}
+
+.datosDer{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 40%;
+  margin-top: 10%;
+}
+
+
+
+.datosDireccion {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 60%;
+}
+
+.titulo {
+  text-align: center;
+}
+
+.formBottom{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.datosVenta, .botones {
+  display: flex;
+  padding: 10px;
+}
+
+.datosVenta {
+  width: 40%;
+  flex-direction: column;
+}
+
+.botones {
+  width: 60%;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.btnConfirmarCompra, .btnRegresar{
+  background-color: #000000;
+  color: white;
+  width: 100%;
+  padding: 15px 32px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  text-transform: uppercase;
+  font-size: 16px;
+}
+
+.btnConfirmarCompra:hover, .btnRegresar:hover {
+  background-color: #444;
+}

@@ -3,9 +3,8 @@ import './homeContent.css'
 
 import { useNavigate } from 'react-router-dom'
 
-import Login from '../../paginas/login/Login'
-
 import logo from '/VynceLogo.png'
+const fotoSauvage  = 'https://res.cloudinary.com/dgwppzl6m/image/upload/v1747159856/Vynce/mtiftzdiomd7qkzgg4xy.jpg'
 
 export default function homeCliente() {
     const navigate = useNavigate()
@@ -41,7 +40,22 @@ export default function homeCliente() {
             </div>
             <div className="card-Login">
                 { rolUsuario ? (
-                    <Login/>
+                    <>
+                        <div className="card-top">
+                            <h1 className="titulo">consigue tus productos de lujo</h1>
+                        </div>
+                        <div className="card-content">
+                            <p className="subtitulo">Hola <b>{localStorage.getItem('nombreEmpleado')}</b></p>
+                            <p className="subtitulo">Ya puedes disfrutar de los producto </p>
+                            <p className='subtitulo'>de lujo que tenemos para ti.</p>
+                        </div>
+                        <picture className="img-container">
+                            <img src={fotoSauvage} alt="Logo" className="img-Marca" />
+                        </picture>
+                        <div className="card-bottom">
+                            <button onClick={() => navigate('/producto/68238b43753e339cda870865')}>Explorar Saugave</button>
+                        </div>
+                    </>
                 ) : (<>
                     <div className="card-top">
                         <h1 className="titulo">INICIAR SESIÓN</h1>
