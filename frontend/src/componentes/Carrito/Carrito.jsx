@@ -9,6 +9,8 @@ import DeleteIcon from '@mui/icons-material/Delete';
 export default function Carrito({ onClose, isOpen }) {
   const usuarioId = localStorage.getItem('userId');
   const [productos, setProductos] = useState([]);
+  const [mensaje, setMensaje] = useState('');
+  const [tipoMensaje, setTipoMensaje] = useState('');
   const navigate = useNavigate();
 
   const obtenerProductos = async () => {
@@ -17,7 +19,6 @@ export default function Carrito({ onClose, isOpen }) {
       const data = await res.json();
       if (Array.isArray(data)) setProductos(data);
 
-      console.log('Productos en el carrito:', data);
     } catch (err) {
       console.error('Error al obtener productos:', err);
     }
@@ -42,6 +43,10 @@ const actualizarCantidad = async (idProducto, indexPresentacion, nuevaCantidad) 
           : p
       )
     );
+
+    setMensaje('Cantidad actualizada');
+    setTipoMensaje('exito');
+    setTimeout(() => setMensaje(''), 3000);
   } catch (err) {
     console.error('Error al actualizar cantidad:', err);
   }
@@ -58,6 +63,11 @@ const eliminarProducto = async (idProducto, indexPresentacion) => {
     setProductos(prev =>
       prev.filter(p => !(p.idProducto === idProducto && p.indexPresentacion === indexPresentacion))
     );
+
+    setMensaje('Producto eliminado del carrito');
+    setTipoMensaje('exito');
+    setTimeout(() => setMensaje(''), 3000);
+
   } catch (err) {
     console.error('Error al eliminar producto:', err);
   }
@@ -70,19 +80,34 @@ const eliminarProducto = async (idProducto, indexPresentacion) => {
   );
 
   useEffect(() => {
+    // No ejecutar si no hay usuarioId
+    if (!usuarioId) return;
+
     const obtenerIdCarrito = async () => {
       try {
         const res = await fetch(`http://localhost:5000/carrito/obtenerIdCarrito/${usuarioId}`);
+        
+        if (!res.ok) {
+          // Si la respuesta no es exitosa, simplemente salir sin lanzar error
+          console.warn('La ruta no fue encontrada o el usuario no tiene carrito.');
+          return;
+        }
+
         const data = await res.json();
         if (data && data.idCarrito) {
           setIdCarrito(data.idCarrito);
+        } else {
+          console.warn('No se encontró el ID del carrito en la respuesta.');
         }
       } catch (err) {
-        console.error('Error al obtener ID del carrito:', err);
+        // Este catch se activa solo si falla la petición por red u otro error técnico
+        console.warn('Error al obtener ID del carrito:', err.message);
       }
     };
+
     obtenerIdCarrito();
   }, [usuarioId]);
+
   const [idCarrito, setIdCarrito] = useState(null);
     
 
@@ -158,6 +183,15 @@ const eliminarProducto = async (idProducto, indexPresentacion) => {
           </div>
         </div>
       </div>
+      {mensaje && (
+        <div className={`mensaje ${tipoMensaje}`}>
+          {tipoMensaje === 'exito' ? (
+            <p>{mensaje}</p>
+          ) : (
+            <p>Error: {mensaje}</p>
+          )}
+        </div>
+      )}
     </div>
   );
 }

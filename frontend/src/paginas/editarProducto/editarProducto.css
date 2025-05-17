@@ -1,0 +1,130 @@
+.editarProducto-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+}
+
+.editarProducto-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  width: 90%;
+  height: 70%;
+  background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.form-header {
+  display: flex;
+  justify-content: center;
+    align-items: center;
+  text-transform: uppercase;
+  width: 100%;
+  height: 50px;
+  justify-content: space-between;
+}
+
+.form-header button {
+  background-color: #000000;
+  color: white;
+  border: none;
+  width: 50px;
+  height: 100%;
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 24px;
+    transition: background-color 0.3s;
+}
+.form-header button:hover {
+  background-color: #333333;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.imagenProducto-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45%;
+  padding: 20px;
+  border-right: 1px #ccc solid;
+}
+
+.imagenProducto {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.datosProducto-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 20px;
+  width: 55%;
+}
+
+.datosProducto-container div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: #ccc solid 1px;
+  padding-bottom: 40px;
+}
+
+.datosProducto-container input {
+  width: 100%;
+  height: 40px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.datosProducto-container label {
+  width: 25%;
+  font-size: 1.5rem;
+    text-transform: uppercase;
+}
+
+.datosProducto-container input:focus {
+  border-color: #000000;
+}
+
+.form-bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+}
+
+.form-bottom button {
+  background-color: #000000;
+  color: white;
+  border: none;
+  width: 30%;
+  height: 100%;
+  border-radius: 5px;
+    padding: 5px;
+  cursor: pointer;
+  text-transform: uppercase;
+    font-size: 1.2rem;
+    transition: background-color 0.3s;
+}
+
+.form-bottom button:hover {
+  background-color: #333333;
+}

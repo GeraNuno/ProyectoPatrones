@@ -75,3 +75,31 @@
 .card-bottom button:hover {
     background-color: #2a300d;
 }
+
+
+.home-admin {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 100%;
+}
+
+.home-admin-title {
+    color: #000;
+    text-transform: uppercase;
+}
+
+.home-admin-logo-image {
+    width: 30%;
+    height: auto;
+    image-resolution: from-image;
+    object-fit: cover;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+}
+.home-admin-logo-image:hover {
+    transform: scale(1.01);
+    filter: brightness(1.1);
+}

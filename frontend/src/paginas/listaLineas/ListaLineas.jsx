@@ -68,7 +68,6 @@ export default function ListaLineas() {
                         <th className="tableAdmin-header">Linea</th>
                         <th className="tableAdmin-header">Marca</th>
                         <th className="tableAdmin-header">Imagen</th>
-                        <th className="tableAdmin-header">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -77,14 +76,7 @@ export default function ListaLineas() {
                             <td className="tableAdmin-data estatus">{linea.nombreLinea}</td>
                             <td className="tableAdmin-data estatus">{linea.nombreMarca}</td>
                             <td className="tableAdmin-data"><img src={linea.imgBanner} alt={linea.nombreLinea} className="img-linea" /></td>
-                            <td className="tableAdmin-data">
-                                <button className="btn-editar">Editar</button>
-                                { linea.estatus === 'ACTIVO' ? (
-                                    <button className="btn-desactivar">Desactivar</button>
-                                ) : (
-                                    <button className="btn-activar">Activar</button>
-                                )}
-                            </td>
+                            
                         </tr>
                     ))}
                 </tbody>

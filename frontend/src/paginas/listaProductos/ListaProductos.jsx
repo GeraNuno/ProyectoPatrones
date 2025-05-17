@@ -117,11 +117,6 @@ export default function ListaProductos() {
                                     </td>
                                     <td className="tableAdmin-data">
                                         <button className="btn-editar" onClick={handleEditarProducto}>Editar</button>
-                                        {presentacion.stockProducto >= 10 ? (
-                                            <button className="btn-desactivar">Desactivar</button>
-                                        ) : (
-                                            <button className="btn-activar">Activar</button>
-                                        )}
                                     </td>
                                 </tr>
                             ))

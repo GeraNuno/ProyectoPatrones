@@ -5,9 +5,7 @@ import Navbar from '../../componentes/navbar/navbar'
 
 export default function ProductosLinea() {
     const token = localStorage.getItem('token');
-    const datosMarca = JSON.parse(localStorage.getItem('marcas')) || [];
-    const marca = datosMarca.find((marca) => marca.nombreMarca === datosMarca[0]?.nombreMarca);
-    
+    const datosMarca = JSON.parse(localStorage.getItem('marcas')) || [];    
     const carruselRef = useRef(null);
     const [mensaje, setMensaje] = useState('');
     const [tipoMensaje, setTipoMensaje] = useState('');
@@ -15,6 +13,9 @@ export default function ProductosLinea() {
     const [datosProductos, setDatosProductos] = useState([]);
     const { nombreMarca, nombreLinea } = useParams();
     const navigate = useNavigate();
+
+    const marca = datosMarca.find((marca) => marca.nombreMarca === nombreMarca);
+
 
     const scroll = (direccion) => {
         if (carruselRef.current) {
@@ -50,7 +51,6 @@ export default function ProductosLinea() {
                 const response = await fetch(`http://localhost:5000/producto/productosCliente/${nombreLinea}`);
                 const data = await response.json();
                 setDatosProductos(data);
-                console.log(data);
             } catch (error) {
                 console.error('Error al obtener los productos:', error);
             }

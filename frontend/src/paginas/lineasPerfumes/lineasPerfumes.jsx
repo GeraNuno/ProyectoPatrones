@@ -36,7 +36,6 @@ export default function lineasPerfumes() {
 
     const handleProductos = (e) => {
         const linea = e.currentTarget.querySelector('.nombre-linea').textContent;
-        console.log(linea);
         navigate(`/${nombreMarca}/${linea}/productos`)
     }
   return (

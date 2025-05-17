@@ -8,9 +8,6 @@ const router = express.Router();
 router.post('/agregar', async (req, res) => {
   const { usuarioId, producto } = req.body;
 
-  console.log('Usuario recibido:', usuarioId);
-  console.log('Producto recibido:', producto);
-
   try {
     // Verifica que el producto y la presentación existan
     const productoDB = await Producto.findById(producto.idProducto);
@@ -142,8 +139,6 @@ router.get('/datosCarrito/:idCarrito', async (req, res) => {
     const carrito = await Carrito.findById(idCarrito).populate('productos.idProducto');
     if (!carrito) return res.status(404).json({ mensaje: 'Carrito no encontrado' });
     
-    console.log('Carrito encontrado:', carrito);
-
     const productosConDatos = carrito.productos.map((item) => {
       const producto = item.idProducto;
       const presentacion = producto.presentaciones[item.tipoPresentacion];

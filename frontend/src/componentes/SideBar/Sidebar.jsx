@@ -105,6 +105,10 @@ export default function Sidebar({ onClose, isOpen }) {
                   
                 </ul>
               </li>
+
+              <li className="sidebar-item">
+                <Link to="/listaPedidos" onClick={onClose} className="sidebar-link">Pedidos</Link>
+              </li>
             </>  
           ) : 
           <>

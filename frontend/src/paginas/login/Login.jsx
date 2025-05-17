@@ -11,8 +11,6 @@ export default function Login() {
 
     const [mensaje, setMensaje] = useState('');
     const [tipoMensaje, setTipoMensaje] = useState(''); // 'error' o 'exito'
-    
-    var nombrecompleto = ''; 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -30,7 +28,7 @@ export default function Login() {
 
             if (response.ok) {
                 const { token, user } = await response.json();
-                localStorage.setItem('nombreEmpleado', user.nombre); // Guardar el nombre completo en el estado
+                localStorage.setItem('nombreUsuario', user.nombre); // Guardar el nombre completo en el estado
                 localStorage.setItem('rolUsuario', user.rolUsuario); // Guardar el tipo de empleado en el estado
                 localStorage.setItem('token', token); // Guardar token en localStorage
                 localStorage.setItem('userId', user.userid); // Guardar el id del usuario en el estado

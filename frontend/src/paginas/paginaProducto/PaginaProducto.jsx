@@ -39,9 +39,10 @@ export default function PaginaProducto() {
 
                     setDatosProductoAgregar({
                         idProducto: data._id,
-                        indexPresentacion: data.presentaciones.length >= 1 ? 1 : 0,
+                        indexPresentacion: data.presentaciones.length > 1 ? 1 : 0,
                         cantidad: 1,
                     });
+
                 }
             } catch (error) {
                 console.error('Error al obtener el producto:', error);
@@ -52,7 +53,6 @@ export default function PaginaProducto() {
     }, [idProducto]);
 
     const handleAgregarAlCarrito = () => {
-        console.log('Datos a agregar:', datosProductoAgregar);
         fetch('http://localhost:5000/carrito/agregar', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -63,16 +63,10 @@ export default function PaginaProducto() {
         })
             .then(res => res.json())
             .then(data => {
-                console.log('Producto agregado:', data);
                 setMensaje('Producto agregado al carrito');
                 setTipoMensaje('exito');
                 setTimeout(() => setMensaje(''), 3000);
 
-                setDatosProductoAgregar({
-                    idProducto: '',
-                    indexPresentacion: 0,
-                    cantidad: 1,
-                });
             })
             .catch(err => {
                 console.error('Error al agregar:', err);

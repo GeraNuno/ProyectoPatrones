@@ -8,7 +8,7 @@ import HomeAdmin from '../../componentes/homeContent/HomeAdmin'
 
 export default function Home() {
     const rol = localStorage.getItem('rolUsuario'); // Obtener el rol del localStorage
-    const nombre = localStorage.getItem('nombreEmpleado'); // Obtener el nombre completo del localStorage
+    const nombre = localStorage.getItem('nombreUsuario'); // Obtener el nombre completo del localStorage
   return (
     <>
         <main className="main-container ">
@@ -26,7 +26,7 @@ export default function Home() {
             </div>
 
             <div className="main-footer">
-
+                © 2025 Vynce S.A. de C.V.
             </div>
         </main>
     </>

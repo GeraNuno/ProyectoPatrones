@@ -114,4 +114,26 @@ router.get('/productos/:id', async (req, res) => {
 }
 );
 
+router.patch('/actualizarPresentacion', async (req, res) => {
+    const { idProducto, idPresentacion, precio, stockProducto } = req.body;
+    try {
+        const producto = await Producto.findById(idProducto);
+        if (!producto) {
+            return res.status(404).json({ message: 'Producto no encontrado' });
+        }
+        const presentacion = producto.presentaciones.id(idPresentacion);
+        if (!presentacion) {
+            return res.status(404).json({ message: 'Presentación no encontrada' });
+        }
+        presentacion.precio = precio;
+        presentacion.stockProducto = stockProducto;
+        await producto.save();
+        res.status(200).json({ message: 'Presentación actualizada con éxito', producto });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Error en el servidor' });
+    }
+}
+);
+
 module.exports = router;

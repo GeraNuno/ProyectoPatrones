@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-import Navbar from '../../componentes/navbar/Navbar'
+import Navbar from '../../componentes/navbar/navbar'
 import { useNavigate } from 'react-router-dom'
 
 export default function RegistroLinea() {

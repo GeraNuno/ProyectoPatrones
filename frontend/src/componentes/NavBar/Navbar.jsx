@@ -10,6 +10,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 
 import Sidebar from '../SideBar/Sidebar';
 import Carrito from '../Carrito/Carrito';
+import Pedidos from '@mui/icons-material/Ballot';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,7 +18,8 @@ export default function Navbar() {
   const navigate = useNavigate();
   const location = useLocation(); // Obtener la ubicación actual
 
-  const nombre = localStorage.getItem('nombreEmpleado'); // Obtener el nombre completo del localStorage
+  const nombre = localStorage.getItem('nombreUsuario'); // Obtener el nombre completo del localStorage
+  const rol = localStorage.getItem('rolUsuario'); // Obtener el rol de usuario del localStorage
 
   const handleToggle = () => {
     if (!isOpen) {
@@ -53,7 +55,7 @@ export default function Navbar() {
   }
 
   const handleLogOut = () => {
-    localStorage.removeItem('nombreEmpleado'); // Limpiar el nombre completo del localStorage
+    localStorage.removeItem('nombreUsuario'); // Limpiar el nombre completo del localStorage
     localStorage.removeItem('token'); // Limpiar el token del localStorage
     localStorage.removeItem('rolUsuario'); // Limpiar el rol de usuario del localStorage
     setTimeout(() => {
@@ -78,14 +80,19 @@ export default function Navbar() {
             <div className="vynce" onClick={handleHome}>VYNCE</div>
           </div>
           <div className="nav-right">
-          <ShoppingCartIcon className="nav-icons" onClick={handleToggleCarrito} />
-            {
-              nombre ? (
-                <LogoutIcon className="nav-icons" onClick={handleLogOut}></LogoutIcon>
+            {nombre ? (
+              rol === 'admin' ? (
+                <LogoutIcon className="nav-icons" onClick={handleLogOut} />
               ) : (
-                <PersonIcon className="nav-icons" onClick={handleLogin}/>
+                <>
+                  <Pedidos className="nav-icons" onClick={() => navigate('/pedidosUsuario')} />
+                  <ShoppingCartIcon className="nav-icons" onClick={handleToggleCarrito} />
+                  <LogoutIcon className="nav-icons" onClick={handleLogOut} />
+                </>
               )
-            }
+            ) : (
+              <PersonIcon className="nav-icons" onClick={handleLogin} />
+            )}
           </div>
         </nav>
       </div>

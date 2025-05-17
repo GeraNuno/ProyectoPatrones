@@ -53,7 +53,7 @@ export default function homeCliente() {
                             <img src={fotoSauvage} alt="Logo" className="img-Marca" />
                         </picture>
                         <div className="card-bottom">
-                            <button onClick={() => navigate('/producto/68238b43753e339cda870865')}>Explorar Saugave</button>
+                            <button onClick={() => navigate('/Dior/Sauvage/productos')}>Explorar Saugave</button>
                         </div>
                     </>
                 ) : (<>

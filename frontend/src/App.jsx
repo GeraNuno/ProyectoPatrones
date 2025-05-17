@@ -11,6 +11,8 @@ import LineasPerfumes from './paginas/lineasPerfumes/lineasPerfumes';
 import ProductosLinea from './paginas/productosLinea/ProductosLinea';
 import PaginaProducto from './paginas/paginaProducto/PaginaProducto';
 import ConfirmarCompra from './paginas/confirmarCompra/ConfirmarCompra';
+import PedidosUsuario from './paginas/pedidosUsuario/pedidosUsuario';
+import DetallesPedido from './paginas/detallesPedido/DetallesPedido';
 
 //Rutas para marcas de fragancias
 import MarcaHome from './paginas/marcaHome/MarcaHome';
@@ -24,6 +26,7 @@ import EditarProducto from './paginas/editarProducto/EditarProducto';
 
 import ListaLineas from './paginas/listaLineas/ListaLineas';
 import ListaProductos from './paginas/listaProductos/ListaProductos';
+import ListaPedidos from './paginas/listaPedidos/ListaPedidos';
 
 //import DiorFragances from './paginas/fragancias/dior/diorHome/DiorFragances';
 //import ValentinoFragances from './paginas/fragancias/valentino/ValentinoFragances';
@@ -55,7 +58,9 @@ function AppContent() {
         <Route path="/:nombreMarca/:nombreLinea/productos" element={<ProductosLinea />} />
         <Route path="/producto/:idProducto" element={<PaginaProducto />} />
         <Route path="/confirmarCompra/:idCarrito" element={<ConfirmarCompra />} />
-
+        <Route path="/pedidosUsuario" element={<PedidosUsuario />} />
+        <Route path="/pedido/:pedidoId" element={<DetallesPedido />} />
+        
         {/* Rutas para Administrador */}
         <Route path="/listaMarcas" element={<ListaMarcas />} />
         <Route path="/registroLinea" element={<RegistroLinea />} />
@@ -65,6 +70,7 @@ function AppContent() {
         <Route path="/registroMarca" element={<RegistroMarca />} />
         <Route path="/registroProducto" element={<RegistroProducto />} />
         <Route path="/editarProducto" element={<EditarProducto />} />
+        <Route path="/listaPedidos" element={<ListaPedidos />} />
 
         {/* Puedes agregar más rutas aquí */}
       </Routes>

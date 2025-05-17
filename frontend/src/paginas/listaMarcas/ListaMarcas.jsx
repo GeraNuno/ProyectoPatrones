@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './ListaMarcas.css'
 
-import Navbar from '../../componentes/navbar/Navbar'
+import Navbar from '../../componentes/navbar/navbar'
 
 export default function ListaMarcas() {
     const [marcasData, setMarcas] = useState([]);
@@ -32,7 +32,6 @@ export default function ListaMarcas() {
                             <th className="tableAdmin-header">Marca</th>
                             <th className="tableAdmin-header">Imagen</th>
                             <th className="tableAdmin-header">Estatus</th>
-                            <th className="tableAdmin-header">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -41,14 +40,7 @@ export default function ListaMarcas() {
                             <td className="tableAdmin-data estatus">{marca.nombreMarca}</td>
                             <td className="tableAdmin-data"><img src={marca.imgMarca} alt={marca.nombreMarca} className="img-marca" /></td>
                             <td className="tableAdmin-data estatus">{marca.estatus}</td>
-                            <td className="tableAdmin-data">
-                                <button className="btn-editar">Editar</button>
-                                { marca.estatus === 'ACTIVO' ? (
-                                    <button className="btn-desactivar">Desactivar</button>
-                                ) : (
-                                    <button className="btn-activar">Activar</button>
-                                )}
-                            </td>
+                            
                         </tr>
                     ))}
                     </tbody>

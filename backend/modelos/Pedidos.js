@@ -6,11 +6,27 @@ const pedidoSchema = new mongoose.Schema({
         ref: 'Usuario',
         required: true,
     },
-    carrito: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Carrito',
-        required: true,
-    },
+    productos: [
+        {
+            producto: {
+                _id: {
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: 'Producto',
+                    required: true,
+                },
+                nombre: String,
+                marca: String,
+                mililitros: Number,
+                precio: Number,
+                imagen: String,
+            },
+            cantidad: {
+                type: Number,
+                required: true,
+                min: 1,
+            },
+        },
+    ],
     total: {
         type: Number,
         required: true,
@@ -24,11 +40,11 @@ const pedidoSchema = new mongoose.Schema({
     telefono: {
         type: String,
         required: true,
-        match: /^[0-9]{10}$/, // ejemplo para México
+        match: /^[0-9]{10}$/,
     },
     estadoPedido: {
         type: String,
-        enum: ['Pendiente', 'Enviado', 'Entregado'],
+        enum: ['Pendiente', 'Aceptado', 'Entregado', 'Cancelado'],
         default: 'Pendiente',
     },
 }, { timestamps: true });
